@@ -59,3 +59,28 @@ stairs(impulse(H,2)*T)
 %% Exercise 3.3
 % * find the time function for F(z) = (3*z^2-1.736*z)/(z^2-1.368*z+0.368)
 %   using partial fraction expansion
+
+num = [3 -1.736] % after dividing numerator by z
+
+den = [1 -1.368 0.368]
+
+
+r = roots(den); %gives what should be on numerator
+
+%partial fraction expansion
+
+%get c1
+z=r(1);
+
+c1 =(3*z-1.736)/(z-r(2));
+
+%get c2
+z=r(2);
+
+c2 =(3*z-1.736)/(z-r(1));
+
+
+c1
+c2
+a1 = r(1)
+a2 = r(2)
