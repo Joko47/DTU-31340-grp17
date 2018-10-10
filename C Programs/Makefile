@@ -1,10 +1,10 @@
-CC = gcc -pthread 
-CFLAGS = -Wall -O1    -I /usr/realtime/include -I /usr/local/include/sdlio 
-LDFLAGS = -L /usr/realtime/lib -L /usr/local/include/sdlio -lcomedi -lm 
-LDFLAGS1 = -L /usr/realtime/lib -L /usr/local/include/sdlio  -lm 
+CC = gcc -pthread
+CFLAGS = -Wall -O1    -I /usr/realtime/include -I /usr/local/include/sdlio
+LDFLAGS = -L /usr/realtime/lib -L /usr/local/include/sdlio -lcomedi -lm
+LDFLAGS1 = -L /usr/realtime/lib -L /usr/local/include/sdlio  -lm
 LIBS =  -lreadline -ltermcap -lcomedi
 
-PROGS = 
+PROGS =
 
 all:	$(PROGS)
 
@@ -19,6 +19,15 @@ ioexample:	ioexample.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 rtstuff:	rtstuff.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+Exc10P1:	Exc10P1.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+Exc10P2:	Exc10P2.o
+	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+Exc10P3:	Exc10P3.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 doc:	$(PROGS:=.ps)
