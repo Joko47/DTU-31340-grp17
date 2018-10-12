@@ -38,8 +38,10 @@ int main()
 	}
 	printf("if done\n");
 	struct sched_param p;
+
+	//setting priority
 	p.sched_priority = sched_get_priority_max(SCHED_FIFO);
-	mlockall(MCL_CURRENT);
+	mlockall(MCL_CURRENT); //locking memory
 	sched_setscheduler(nam2num("h17ex1"),SCHED_FIFO,&p);
 	printf("Starting task\n");
 
