@@ -3,9 +3,9 @@ int main()
 {
 	float dummy = 0;
 	float e,u = 0;
-	float b0 = 3.0;
-	float b1 = -2.4;
-	float a1 = -0.99;
+	float b0 = 85.96;
+	float b1 = -73.49;
+	float a1 = -0.4379;
 	float dummy2 = 0;
 	float f0,f1 = 0;
 
