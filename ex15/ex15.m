@@ -66,7 +66,7 @@ answer = sum(abs(res))/2
 
 %% 3.2) 3.3) and 3.4)
 D08=tf([1],[1 -0.8],1);
-FB=tf([-1.7 1.9],[1],1);
+FB=tf([1.9 -1.7],[1],1);
 
 sys= (D08*Gz0)/(1+D08*Gz0*FB)
 sys = minreal(sys)
