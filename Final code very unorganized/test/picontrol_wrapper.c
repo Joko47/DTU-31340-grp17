@@ -18,7 +18,7 @@
   *   in the Simulink Coder User's Manual in the Chapter titled,
   *   "Wrapper S-functions".
   *
-  *   Created: Wed Oct 24 14:49:21 2018
+  *   Created: Wed Nov 21 12:02:47 2018
   */
 
 
@@ -35,11 +35,9 @@
 
 /* %%%-SFUNWIZ_wrapper_includes_Changes_BEGIN --- EDIT HERE TO _END */
 #include <math.h>
-#include "regul.h"
-#include "addainterface.h"
-statetype states;
-double e;
-unsigned int aux;
+void regulinit(void);
+double regulout(double e,double *gain,double *Ti);
+void regulupdate(double e,double * gain,double *Ti) ;
 /* %%%-SFUNWIZ_wrapper_includes_Changes_END --- EDIT HERE TO _BEGIN */
 #define u_width 1
 #define y_width 1
@@ -55,13 +53,11 @@ unsigned int aux;
  * Output functions
  *
  */
-void regulNY_Outputs_wrapper(const real_T *ref,
-                          const real_T *u0,
+void picontrol_Outputs_wrapper(const real_T *u0,
                           real_T *y0 ,
 			      const real_T  *xD,
-                          const real_T  *b0, const int_T  p_width0, 
-                          const real_T  *b1, const int_T  p_width1, 
-                          const real_T  *a1, const int_T p_width2)
+                          const real_T  *gain, const int_T  p_width0, 
+                          const real_T  *Ti, const int_T p_width1)
 {
 /* %%%-SFUNWIZ_wrapper_Outputs_Changes_BEGIN --- EDIT HERE TO _END */
 /* This sample sets the output equal to the input
@@ -71,17 +67,16 @@ void regulNY_Outputs_wrapper(const real_T *ref,
       y1[0].re = u1[0].re;
       y1[0].im = u1[0].im;
 */
-if(xD[0]<0.5) regul_init(&states);
-
-adin(u0,&aux);
-
-
-
-regul_out(&states,ref[0]-aux,*b0);
-
-daout(y0,states.u);
-
-/*y0[0]=states.u;*/
+if(xD[0]<0.5)
+    regulinit();
+{
+   unsigned int adin;
+   double e,u;
+   adin=u0[0];
+   e=(double)adin -2048;
+   u=regulout(e,gain,Ti);
+y0[0]=u+2048;
+}
 /* %%%-SFUNWIZ_wrapper_Outputs_Changes_END --- EDIT HERE TO _BEGIN */
 }
 
@@ -89,22 +84,24 @@ daout(y0,states.u);
   * Updates function
   *
   */
-void regulNY_Update_wrapper(const real_T *ref,
-                          const real_T *u0,
+void picontrol_Update_wrapper(const real_T *u0,
                           const real_T *y0 ,
                           real_T *xD, 
-                          const real_T  *b0,  const int_T  p_width0,
-                          const real_T  *b1,  const int_T  p_width1,
-                           const real_T *a1, const int_T  p_width2)
+                          const real_T  *gain,  const int_T  p_width0,
+                           const real_T *Ti, const int_T  p_width1)
 {
   /* %%%-SFUNWIZ_wrapper_Update_Changes_BEGIN --- EDIT HERE TO _END */
 /*
  * Code example
  *   xD[0] = u0[0];
 */
-
 xD[0]=1;
-
-regul_update(&states,e,*a1,*b1);
+{
+   unsigned int adin;
+   double e;
+   adin=u0[0];
+   e=(double)adin -2048;
+   regulupdate(e,gain,Ti);
+}
 /* %%%-SFUNWIZ_wrapper_Update_Changes_END --- EDIT HERE TO _BEGIN */
 }
