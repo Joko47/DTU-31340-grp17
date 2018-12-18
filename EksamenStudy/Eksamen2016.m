@@ -72,7 +72,48 @@ eq = simplify(eq)
 answer =  sym2poly(subs(eq, o, 1))
 
 %% 13 ??
+% part of 13 rest on notebog
+x2=1
+eq=o==(x2*-0.8)+(x2+o)*0.2
+solx = solve(eq,o)
+
+%% 14
+%see exam 2017 and then check again
 disp("###################################################")
-disp("################## Help 13 #########################")
+disp("################## Help 14 #########################")
 disp("###################################################")
 
+
+%% 15
+-((10-(-10))/(0.8-0)) %- comes from the summation point
+
+%% 16 to 19
+%notesbog
+
+%% 20
+%notesbog
+
+%% 21
+%notesbog
+%% 22
+%notesbog
+%% 23
+Ts=1
+%for after 2.2
+sys=tf([2.2],1,Ts)
+t = impulse(sys,Ts)
+ans22=sum(abs(t))
+
+%for after 2.1
+sys=tf([2.1],[1 0 ],Ts)
+t = impulse(sys,Ts)
+ans21=sum(abs(t))
+
+%for after a
+a=0.8
+sys=tf([-2.1*a 2.2*a 0],[1 -1 ],Ts)
+impulse(sys)*Ts
+
+disp("###################################################")
+disp("################## Help 22 #########################")
+disp("###################################################")
