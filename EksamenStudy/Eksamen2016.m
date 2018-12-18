@@ -30,10 +30,10 @@ b=0.02
 c=0.8
 d=0.2
 
-eq=((a*(o/(1-o))+1)/(1+b*(o/(1-o))+1))*((1-c*o)/(1-d*o))
+eq=(((a*(o/(1-o)))/(1+b*(o/(1-o))))+1) * ((1-c*o)/(1-d*o))
 eq = simplify(eq)
 bottom =  sym2poly(subs(eq, o, 1))
-eq=(((o/(1-o)))/(1+b*(o/(1-o))+1))*((1-c*o)/(1-d*o))
+eq=(((o/(1-o)))/(1+b*(o/(1-o))))*((1-c*o)/(1-d*o))
 eq = simplify(eq)
 top = sym2poly(subs(eq, o, 1))
 
@@ -48,31 +48,31 @@ top = sym2poly(subs(eq, o, 1))
 result = top/bottom/2
 
 %% 8 ??
+disp("###################################################")
+disp("################## Help 8 #########################")
+disp("###################################################")
 
 %% 9
-Ts=1;
-input1=[1,1,1,1,1,1]
-output1=[1 1,1.5,1.87,2.1630,2.3971]
+%notesbog
 
+%% 10
+%tf from e to x2
+eq=(((a*(o/(1-o)))/(1+b*(o/(1-o))))+1) 
+eq = simplify(eq)
+answer = sym2poly(subs(eq, o, 1))
 
-sys = tf(output1,input1,Ts)
-%%
+%% 11
+%notesbog
 
-sys = tf([1 -0.8],[1 -0.2],Ts)
+%% 12
+% Dz transfer function but z^-1 is 1
 
+eq=(((a*(o/(1-o)))/(1+b*(o/(1-o))))+1) * ((1-c*o)/(1-d*o))
+eq = simplify(eq)
+answer =  sym2poly(subs(eq, o, 1))
 
-[z,p]=zpk(sys)%
-%%
-syms b1 a1 a2
-eqn1 = 1.5+a1 == b1+1;
-eqn2 = 1.87+ a1*1.5+a2 == b1+1;
-eqn3 = 3.1630 + a1*1.87 + 1.5*a2 == b1+1;
+%% 13 ??
+disp("###################################################")
+disp("################## Help 13 #########################")
+disp("###################################################")
 
-
-[A,B] = equationsToMatrix([eqn1, eqn2, eqn3], [b1, a1, a2])
-
-X = linsolve(A,B)
-%%
-
-b1=-0.5;
-b1+1-1.5
