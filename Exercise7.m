@@ -13,6 +13,7 @@ Jlm=Jl/N^2
 Jtot=Jlm+Jm
 J=Jtot;
 
+
 Vcc = 10;
 Vdd = 0;
 pot = 352; %deg
