@@ -27,9 +27,9 @@ sys = G0z*Dz/(1+G0z*Dz)
 sys =minreal(sys)
 close all 
 figure
-ramp = step(rz);
+ramp = impulse(rz)*Ts;
 hold on
-response = step(rz*sys);
+response = impulse(rz*sys)*Ts;
 
 ramp(end)-response(end)%sol more less
 
