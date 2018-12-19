@@ -31,7 +31,7 @@ ramp = impulse(rz)*Ts;
 hold on
 response = impulse(rz*sys)*Ts;
 
-ramp(end)-response(end)%sol more less
+ramp(end)-response(end)%sol - or very very close
 
 %% 1.3
 %lazy mode
@@ -107,7 +107,8 @@ eq=((0.2*(o/(1-o))+1)/(1+0.1*(o/(1-o))+1))*((1-0.7*o)/(1-0.4*o))
 eq = simplify(eq)
 subs(eq, o, 1)
 
-%%
+%% 2.3
+
 
 
 %% problem 4.1

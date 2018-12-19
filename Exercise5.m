@@ -17,6 +17,7 @@ Pd=db2mag(-magdb)
 
 
 %% 5.1.3
+
 sys=tf(Pd*4.977,[1 -0.8616],Ts);
 deltaw=logspace(1,3,10000);
 [m,p,w]=bode(sys,deltaw);
