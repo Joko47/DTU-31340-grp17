@@ -15,12 +15,10 @@ ans =tf(TFnum,TFden)
 c2d(ans,Ts)
 
 %% 2
-
-sys = tf([1],[1 1])
-bode(sys)
-
-%% 3 ?
-
+%notesbog
+%% 3 
+Freq = 1/0.02
+aliasing = Freq-48
 %% 4 
 had=0.5 %always
 
@@ -51,7 +49,9 @@ result = top/bottom/2
 disp("###################################################")
 disp("################## Help 8 #########################")
 disp("###################################################")
-
+nda=1
+nad=nda;
+2^(nad-nda) %maybe its this
 %% 9
 %notesbog
 
@@ -78,14 +78,15 @@ eq=o==(x2*-0.8)+(x2+o)*0.2
 solx = solve(eq,o)
 
 %% 14
-%see exam 2017 and then check again
-disp("###################################################")
-disp("################## Help 14 #########################")
-disp("###################################################")
+
+hAD = 7;
+bit = 12;
+range = 0.8-0;
+range*(hAD/2^bit)*1000 %1000 for m to mm
 
 
 %% 15
--((10-(-10))/(0.8-0)) %- comes from the summation point
+-((10-(-10))/(0.8-0)) %minus sign comes from the summation point
 
 %% 16 to 19
 %notesbog
@@ -115,5 +116,15 @@ sys=tf([-2.1*a 2.2*a 0],[1 -1 ],Ts)
 impulse(sys)*Ts
 
 disp("###################################################")
-disp("################## Help 22 #########################")
+disp("################## Help 23 #########################")
 disp("###################################################")
+
+%%
+
+% trying to cheating and getting transfer function from simulink
+[A,B,C,D] = dlinmod('worstanal',1);
+[num,den]= ss2tf(A,B,C,D);
+sys = tf(num,den,1)
+minreal(sys)
+t = impulse(sys)*1
+sum(abs(t))
