@@ -67,9 +67,50 @@ bit = 10;
 l = 1-0;
 l*(hAD/2^bit)*1000 %1000 for m to mm
 
-%% 18
+%% 16
 
 -((10-(-10))/l)
+
+%% 18
+clc;
+
+k1 = 0.3;
+k2 = 0.15;
+d1 = 0;
+d2 = 0;
+e = 0;
+f = 0;
+u = 0;
+intg = 0;
+
+  for i=1:8
+  
+    e = 1;
+    f=e-d1;
+    u(i) = d2+f;
+    
+    intg=intg+f;
+    d1 = k1*intg;
+    d2 = k2*intg;
+  end
+ u
+dz0 = tf([1 -0.85],[1 -0.7],1);
+dz1 = tf([1 -0.30],[1 -0.15],1);
+dz2 = tf([1 -0.15],[1 -0.30],1);
+dz3 = tf([1 -0.45],[1 -0.85],1);
+dz4 = tf([1 -0.60],[1 -0.55],1);
+
+
+output1 = step(dz0,7);
+output2 = step(dz1,7);
+output3 = step(dz2,7);
+output4 = step(dz3,7);
+output5 = step(dz4,7);
+ans1 = round(u-output1.',2)
+ans2 = round(u-output2.',2)
+ans3 = round(u-output3.',2)
+ans4 = round(u-output4.',2)
+ans5 = round(u-output5.',2)
 
 %% 19
 
@@ -159,6 +200,45 @@ tf([1 -0.4],[1 -0.9 0.08])
 %% 21
 % see pdf
 
+clc;
+
+k1 = 0.1;
+k2 = -0.7;
+k3 = 0.9;
+d1 = 0;
+d2 = 0;
+e = 0;
+f = 0;
+u = 0;
+intg = 0;
+
+  for i=1:8
+  
+    e = 1;
+    ut=e+d1;
+    u(i) = d2+ut;
+    
+    d1 = k2*e+k3*ut;
+    d2 = k2*ut+k1*u(i);
+  end
+ u
+dz0 = tf([1 -1.4 0.49],[1 -1 0.09],1);
+dz1 = tf([1 -0.7],[1 -0.9],1);
+dz2 = tf([1 -1.4 0.07],[1 -1.4 0.07],1);
+dz3 = tf([1 -0.8 0.09],[1 -1.6 0.49],1);
+dz4 = tf([1 -0.3 0.09],[1 -1.7 0.49],1);
+
+
+output1 = step(dz0,7);
+output2 = step(dz1,7);
+output3 = step(dz2,7);
+output4 = step(dz3,7);
+output5 = step(dz4,7);
+ans1 = round(u-output1.',2)
+ans2 = round(u-output2.',2)
+ans3 = round(u-output3.',2)
+ans4 = round(u-output4.',2)
+ans5 = round(u-output5.',2)
 
 
 %% 22
@@ -190,6 +270,48 @@ hAD= 9;
 bit = 12;
 l = 360-0;
 l*(hAD/2^bit)
+
+%% 21
+clc;
+
+k1 = 4.8;
+k2 = 0.2;
+k3 = 2.0;
+d1 = 0;
+d2 = 0;
+e = 0;
+f = 0;
+u = 0;
+intg = 0;
+
+  for i=1:8
+  
+    e = 1;
+    f=e-d1;
+    u(i) = f*k1+d2;
+    
+    intg=intg+f;
+    d1 = k2*intg;
+    d2 = k3*d1;
+  end
+ u
+dz0 = tf([4.8 -0.30],[1 -0.8],1);
+dz1 = tf([4.8 -4.4],[1 -0.8],1);
+dz2 = tf([4.8 -4.6],[1 -0.8],1);
+dz3 = tf([4.8 -4.6],[1 -0.7],1);
+dz4 = tf([4.8 -4.5],[1 -0.7],1);
+
+
+output1 = step(dz0,7);
+output2 = step(dz1,7);
+output3 = step(dz2,7);
+output4 = step(dz3,7);
+output5 = step(dz4,7);
+ans1 = round(u-output1.',2)
+ans2 = round(u-output2.',2)
+ans3 = round(u-output3.',2)
+ans4 = round(u-output4.',2)
+ans5 = round(u-output5.',2)
 %% 22
 k1 = 4.8;
 k2 = 0.2;
