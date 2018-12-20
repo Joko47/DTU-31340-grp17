@@ -4,51 +4,32 @@ sys =tf([0.5],[0.04 1 0])
 sys = c2d(sys,Ts)
 minreal(sys)
 
-%% 2
-G0z=tf([3.3e-3 2.6e-3],[1 -1.4 0.4],0.01)
-bode(G0z)
+%% 2 stolen from jakob
+T= 0.01;
+sysd = tf([3.3*10^(-3) 2.6*10^(-3)],[1 -1.40 0.40],T);
 
-%check where phase margin is 60º (at 125)
-% it is more less
-gaindb = 31.5 %db
+deltaw=logspace(0,3,10000);
+[m,p,w]=bode(sysd,deltaw);
 
-
-%convert db to number
-res = 10^(gaindb/20)
-disp("###################################################")
-disp("################## Help 2 #########################")
-disp("###################################################")
+index = find(p <= -120,1);
+mag = m(index);
+Kp = 1/mag
 
 %% 3
+T= 0.01;
+sysd = tf([3.3*10^(-3) 2.6*10^(-3)],[1 -1.40 0.40],T);
+ctrd = tf([0.1541 -0.1441],[1 -1],T);
 
-disp("###################################################")
-disp("################## Help 3 #########################")
-disp("###################################################")
-kp1=[130.1 100.43 83.9 159.4 55.2]
-G0z=tf([3.3e-3 2.6e-3],[1 -1.4 0.4],Ts)
-%Dz=tf(kp1*[0.1542 -0.1441],[1 -1],Ts)
+Kp=[130.1,100.43,83.9,159.4,55.2];
+phase = [];
 
+for n = 1:length(Kp)
+    [Gm,Pm,Wcg,Wcp] = margin(sysd*Kp(n)*ctrd);
+    phase = [phase Pm];
+end;
 
-%
- Dz=tf([0.1542 -0.1441],[1 -1],Ts)
- [mag,phase,wout] =    bode(G0z*Dz/(1+G0z*Dz))
- 
- phase=squeeze(phase)
- maxid = find(phase ==max(phase(130:174)))
- 
+Kp(find(phase == max(phase),1))
 
- wow =  mag(maxid) %index of highest phase margin
- 1/wow
-
-%
-bode(G0z*Dz/(1+G0z*Dz))
-
-
-gaindb = 43 %db
-
-
-%convert db to number
-res = 10^(gaindb/20)
 
 %% 4
 1/Ts > 2*44 %if true frequency stays the same

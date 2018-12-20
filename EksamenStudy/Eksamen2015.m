@@ -28,7 +28,7 @@ eq=(1 -0.9*z)/(1-0.95*z)*((0.2*z/(1-z)+1)/(1+0.4* z/(1-z)))
 eq = simplify(eq)
 bottom =  sym2poly(subs(eq, z, 1))
 
-
+%%
 eq=1/(1-0.95*z)*((0.2*z/(1-z)+1)/(1+0.4* z/(1-z)))
 eq = simplify(eq)
 top =  sym2poly(subs(eq, z, 1))
@@ -51,4 +51,43 @@ nda=10
 nad=12;
 2^(nad-nda) %maybe its this
 
-%% 9
+%% 9-13
+%notesbog
+
+%% 14
+hAD= 9;
+bit = 12;
+l = 360-0;
+l*(hAD/2^bit)
+
+%% 15
+-((10-(-10))/(360-0)) %minus sign comes from the summation point
+
+%% 16 mean power model closed loop
+Gz0=tf(1,[1 -0.9],Ts)
+%notesbog
+Dz = tf([0.5 -0.45],[1 -0.98],Ts)
+
+
+sys =tf([0.5 -0.47],[1 -0.98],Ts)
+
+covar(Dz*Gz0/(1+Dz*Gz0),1/12)
+%% 17 and 19
+covar(Gz0/(1+Dz*Gz0),1/12)
+
+%% 18
+sys = tf([2 -2],[1 -0.98],Ts)
+covar(sys*Gz0/(1+Dz*Gz0),1/12)
+
+%% 20
+hterm=1/3
+mean1= -0.5*-1*Gz0/(1+Dz*Gz0)
+mean2= -0.5*-sys*Gz0/(1+Dz*Gz0)
+mean3= -0.5*-1*Gz0/(1+Dz*Gz0)
+means = mean1+mean2+mean3
+impulse(means)
+
+%%
+sys = tf([2 -2],[1 -0.98],Ts)
+hhh = step(sys)*0.4
+plot(hhh)

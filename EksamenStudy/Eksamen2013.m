@@ -111,7 +111,7 @@ subs(eq, o, 1)
 
 
 
-%% problem 4.1
+%% problem 4.1 mean power model open loop
 
 %tf from after 1-a to output
 sys = tf(1,1,1)
