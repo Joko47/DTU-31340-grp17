@@ -91,3 +91,29 @@ impulse(means)
 sys = tf([2 -2],[1 -0.98],Ts)
 hhh = step(sys)*0.4
 plot(hhh)
+
+%% 22
+a=0.4
+b=0.3
+sys=tf([1 -b],[1 -a],Ts)
+result=covar(sys,1/12)
+
+%which one is the same
+(1-2*a*b+b*b)/(1-a^2)/12
+
+(1-2*a+b)/(1-a^2)/12
+
+(2*a*b+b)/(1-b^2)/12
+
+(1+b*b)/(1-a*a)/12
+
+(1-2*a*b+b)/(1-b*b)/12
+
+
+%%
+
+integ=tf([1],[1 -1],1)
+wow =tf([1],[1],1)
+step(integ)
+
+
